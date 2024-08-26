@@ -1,6 +1,7 @@
 - hosts: localhost
   vars:
     git_repo: "https://github.com/Amenigharbi/Angularproject_with_dockerfile_and_jenkinsfile.git"
+    project_dir: "/home/client/helloangular___proj"
 
   tasks:
     - name: Démarrer le service Docker
@@ -17,6 +18,7 @@
     - name: Cloner le dépôt GitHub
       git:
         repo: "{{ git_repo }}"
+        dest: "{{ project_dir }}"
         version: master
         force: yes
 
