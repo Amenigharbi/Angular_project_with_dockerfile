@@ -1,4 +1,4 @@
-- hosts: localhost
+- hosts: all
   become: yes
   vars:
     git_repo: "git@github.com:Amenigharbi/Angularproject_with_dockerfile.git"
@@ -15,7 +15,7 @@
       apt:
         name: git
         state: present
-        
+
     - name: Cloner le dépôt GitHub
       git:
         repo: "{{ git_repo }}"
