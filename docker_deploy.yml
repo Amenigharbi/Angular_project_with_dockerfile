@@ -1,5 +1,4 @@
 - hosts: localhost
-  become: yes
   vars:
     git_repo: "git@github.com:Amenigharbi/Angularproject_with_dockerfile.git"
     project_dir: "/home/client/helloangular-proj"
