@@ -1,7 +1,7 @@
 - hosts: localhost
   vars:
     git_repo: "https://github.com/Amenigharbi/Angularproject_with_dockerfile_and_jenkinsfile.git"
-    project_dir: "/home/client/helloangular___proj"
+    project_dir: "/var/lib/jenkins/helloangular_proj"
 
   tasks:
     - name: Démarrer le service Docker
