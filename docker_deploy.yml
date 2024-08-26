@@ -1,0 +1,33 @@
+- hosts: localhost
+  become: yes
+  vars:
+    project_dir: "/home/client/helloangular-proj"
+
+  tasks:
+    - name: Démarrer le service Docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Installer Git
+      apt:
+        name: git
+        state: present
+
+    - name: Construire l'image Docker pour le projet Angular
+      command: docker build -t angular-app .
+      args:
+        chdir: "{{ project_dir }}"
+
+    - name: Exécuter le conteneur Docker
+      docker_container:
+        name: angular-app-container
+        image: angular-app
+        state: started
+        ports:
+          - "4200:4200"
+        restart_policy: always
+
+
+
