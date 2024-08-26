@@ -1,0 +1,53 @@
+pipeline {
+agent any
+          
+stages {
+
+ stage('clone') {          
+         steps {
+
+             checkout scm
+             
+         
+         
+         }
+ }
+ stage('  Build  image') {
+           steps {
+              script {
+                sh 'sudo docker build -t malekaribi/imgangular:latest .'
+               
+               
+          }
+        }
+}
+stage('Create container') {
+           steps {
+              script {
+              
+
+                sh'sudo docker run -d --name angular -p 8084:80 malekaribi/imgangular:latest' 
+               
+               
+          }
+        }
+        }
+        
+
+  stage('deploy in Docker Hub') {
+          
+          steps {
+              script {
+  withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) 
+  {
+                   sh 'docker login -u malekaribi -p ${dockerhubpwd}'
+                            
+                             sh  'sudo docker push malekaribi/imgangular:latest'
+  }
+                  
+          }
+        }
+  }
+}
+}
+
