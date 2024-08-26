@@ -5,7 +5,7 @@ pipeline {
         stage('deploy') {          
             steps {
                 script {
-                    sh 'ansible-playbook docker_deploy.yml'
+                    sh 'ansible-playbook -i hosts docker_deploy.yml'
                 }
             }
         }
