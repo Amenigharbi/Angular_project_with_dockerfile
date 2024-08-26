@@ -1,6 +1,7 @@
 - hosts: localhost
   become: yes
   vars:
+    git_repo: "git@github.com:Amenigharbi/Angularproject_with_dockerfile.git"
     project_dir: "/home/client/helloangular-proj"
 
   tasks:
@@ -14,6 +15,13 @@
       apt:
         name: git
         state: present
+        
+    - name: Cloner le dépôt GitHub
+      git:
+        repo: "{{ git_repo }}"
+        dest: "{{ project_dir }}"
+        version: master
+        force: yes
 
     - name: Construire l'image Docker pour le projet Angular
       command: docker build -t angular-app .
